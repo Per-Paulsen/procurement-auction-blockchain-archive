@@ -34,13 +34,16 @@ in principle, suppliers expect renegotiation. They cannot be sure the
 buyer won't be swayed by a post-auction call. So they shade their bids,
 which pulls the entire auction outcome away from efficiency.
 
-The mechanism design literature (Williamson, Hart-Moore property
-rights, Bolton 2005, Implementation Theory) treats this as a problem of
-incomplete contracts and ex-post opportunism. The standard solution is
-ownership rights or transaction-cost-based integration. **Smart
-contracts offer a different solution at the mechanism layer: the
-auction itself becomes the commitment device, because the code cannot
-be deviated from.**
+The relevant theoretical lens is **mechanism design with limited
+commitment**: a body of work that takes the mechanism designer's
+inability to credibly commit to announced outcomes as the central
+friction (McAfee & Vincent 1997 on sequentially optimal auctions;
+Bester & Strausz 2001 on the revelation principle without commitment;
+Skreta 2006 on sequentially optimal mechanisms). What this literature
+treats as a structural constraint, smart contracts treat as a tooling
+problem: by encoding the auction in immutable code, the buyer commits
+not by intention but by structural impossibility of deviation. **The
+auction itself becomes the commitment device.**
 
 ## How it works — the four-stage reverse auction
 
@@ -63,8 +66,7 @@ Each supplier calls `quotation(...)` with their RFI or RFP form
 committed as a `bytes32` hash. Confidentiality is preserved on-chain;
 the buyer reveals the off-chain content of accepted RFQs separately.
 
-![Quotation requested](screenshots/93_quotation_requested.jpg)
-![Supplier details on-chain](screenshots/90_supplier_details.jpg)
+![Supplier A submitting their quotation form (bytes32 RFQ_form hash)](screenshots/91_quotation_execute_A.jpg)
 
 **3. Buyer evaluates quotations and assigns bonus/malus per supplier.**
 
@@ -160,13 +162,14 @@ Solidity tutorial repository
 The procurement-specific multi-stage architecture (RFI/RFP hash
 commits, bonus/malus per supplier, qualification → final auction
 filtering, winner-payable confirmation) is an original adaptation of
-the four-stage TWS-Partners-style procurement schema, extended for
+a multi-stage TWS-Partners-style awarding design, extended for
 combinatorial bidding logic in early drafts.
 
-The theoretical framing draws on Williamson's transaction cost
-economics, Hart-Moore property rights theory, Bolton's *Contract
-Theory* (2005), and the implementation theory literature (Mas-Colell,
-Moore-Repullo).
+The theoretical framing draws on the mechanism-design-with-limited-
+commitment literature (McAfee & Vincent 1997; Bester & Strausz 2001;
+Skreta 2006) and the broader implementation theory tradition (Maskin
+1977/1999; Moore & Repullo 1988). Bolton & Dewatripont's *Contract
+Theory* (2005, MIT Press) provides the textbook synthesis.
 
 ---
 
