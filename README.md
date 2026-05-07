@@ -5,6 +5,8 @@
 
 **Credible commitment for procurement auctions, implemented on Ethereum.**
 
+▶️ **[Try the contract yourself in Remix](https://remix.ethereum.org/?#url=https://github.com/Per-Paulsen/procurement-auction-blockchain-archive/blob/main/contracts/procurement_clean_v2.sol)** — opens `procurement_clean_v2.sol` (Solidity ^0.8.4) directly in the browser-based Remix IDE. No wallet, no setup: compile, deploy on Remix VM, and click through the auction lifecycle yourself.
+
 ## The pitch in one paragraph
 
 In B2B procurement, even an optimized multi-stage auction (the kind built
@@ -109,13 +111,13 @@ state.
 
 | Folder            | What it shows                                                                          |
 | ---               | ---                                                                                    |
-| `contracts/`      | Five Solidity iterations from sketch to clean: `sc.sol` → `simpleAuctionContract.sol` → `fullAuctionContract.sol` → `procurementContract.sol` → `procurement_clean.sol`. Plus `abi.json` (compiled output) and `package.json` (deps). |
+| `contracts/`      | Six Solidity files. Five 2022 iterations from sketch to clean (Solidity `^0.4.25`): `sc.sol` → `simpleAuctionContract.sol` → `fullAuctionContract.sol` → `procurementContract.sol` → `procurement_clean.sol`. Plus `procurement_clean_v2.sol` — the March 2025 polish pass on Solidity `^0.8.4` (the version visible in the screenshots; this is the recommended file to open in Remix). Plus `abi.json` (compiled output) and `package.json` (deps). |
 | `screenshots/`    | Fourteen Remix IDE screenshots from the March 2025 polish pass, walking through the contract lifecycle from deployment to winning-bid confirmation. |
 
 ## Tech stack
 
-- **Smart contract language**: Solidity (early iterations on `^0.4.25`,
-  March 2025 pass on `^0.8.4`)
+- **Smart contract language**: Solidity (2022 iterations on `^0.4.25`;
+  March 2025 polish pass on `^0.8.4`, see `contracts/procurement_clean_v2.sol`)
 - **IDE**: Remix Ethereum (browser-based)
 - **Test network**: Rinkeby (active during 2022 dev) — deprecated by
   Ethereum Foundation in October 2022. The 2025 pass ran on Remix VM
