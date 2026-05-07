@@ -331,8 +331,9 @@ contract ProcurementContract{
        
         emit Auction_Ended("The auction has ended and Thank you for participating. The winning supplier and bid is", winning_supplier, leading_bid);
         require(msg.value == leading_bid,"The amount does not equal the awarding bid price");
-        winning_supplier.transfer(leading_bid);
-       
+        (bool sent, ) = winning_supplier.call{value: leading_bid}("");
+        require(sent, "Transfer to winning supplier failed.");
+
         return true;
     }
 
