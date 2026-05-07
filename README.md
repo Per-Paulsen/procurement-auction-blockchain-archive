@@ -1,0 +1,174 @@
+# Procurement Auctions on the Blockchain (archived)
+
+> Archived snapshot of a 2022 Solidity prototype with a 2025 polish pass.
+> No longer maintained.
+
+**Credible commitment for procurement auctions, implemented on Ethereum.**
+
+## The pitch in one paragraph
+
+In B2B procurement, even an optimized multi-stage auction (the kind built
+by specialist firms like TWS Partners) can fail in practice — not because
+the mechanism is bad, but because suppliers can't fully trust that the
+outcome is final. They expect renegotiation. They hedge their bids
+accordingly. The auction degrades into yet another round of negotiation.
+Smart contracts solve exactly this layer of the problem: an
+auction-as-code, deployed on a public blockchain, can credibly commit to
+its own outcome. The buyer cannot deviate, even if they wanted to. This
+repository implements a four-stage reverse procurement auction
+(pre-auction → quotation → qualification → final auction) on Solidity,
+with a bonus/malus mechanism for supplier differentiation.
+
+## Origin: a Tier-1 automotive supplier story
+
+While supporting auction-design consulting at a Tier-1 automotive
+supplier, my mentor told me about an Italian supplier who had been
+eliminated in the qualification round. The supplier called my mentor
+and asked: *"How do we proceed from here?"* My mentor: *"You don't —
+you've been eliminated."* The supplier: *"Yes, I understand — but how
+do we proceed? I can of course bid lower."*
+
+That conversation crystallized the commitment problem in procurement.
+Even when the buyer is committed to a transparent, competitive process
+in principle, suppliers expect renegotiation. They cannot be sure the
+buyer won't be swayed by a post-auction call. So they shade their bids,
+which pulls the entire auction outcome away from efficiency.
+
+The mechanism design literature (Williamson, Hart-Moore property
+rights, Bolton 2005, Implementation Theory) treats this as a problem of
+incomplete contracts and ex-post opportunism. The standard solution is
+ownership rights or transaction-cost-based integration. **Smart
+contracts offer a different solution at the mechanism layer: the
+auction itself becomes the commitment device, because the code cannot
+be deviated from.**
+
+## How it works — the four-stage reverse auction
+
+The contract codifies the multi-stage TWS-style procurement schema,
+extended with a bonus/malus system for supplier differentiation.
+
+**1. Buyer deploys the contract and issues a request for quotation.**
+
+The buyer (the deployer) calls `request_for_quotation(...)` with the
+procurement specification (committed via SHA-256 hash for
+confidentiality), reserve price, bid decrement, and durations for
+qualification and final auction.
+
+![Contract deployment in Remix VM](screenshots/99_contract_deploy.jpg)
+![request_for_quotation called by buyer](screenshots/96_request_quotation_execute.jpg)
+
+**2. Suppliers submit quotations.**
+
+Each supplier calls `quotation(...)` with their RFI or RFP form
+committed as a `bytes32` hash. Confidentiality is preserved on-chain;
+the buyer reveals the off-chain content of accepted RFQs separately.
+
+![Quotation requested](screenshots/93_quotation_requested.jpg)
+![Supplier details on-chain](screenshots/90_supplier_details.jpg)
+
+**3. Buyer evaluates quotations and assigns bonus/malus per supplier.**
+
+For each participating supplier, the buyer calls
+`quotation_evaluation(supplier, bonus, malus)`. This is the
+procurement-specific extension: a supplier with a strong track record
+gets a bid bonus (their effective bid is reduced), while a supplier
+with quality concerns gets a malus (their effective bid is increased).
+
+![Quotation evaluation: bonus 5, malus 0 for supplier A](screenshots/89_quotation_evaluation_A.jpg)
+![Accepted suppliers announced](screenshots/88_announce_accepted_suppliers.jpg)
+
+**4. Qualification auction: first-round bidding with bonus/malus
+adjustment.**
+
+Accepted suppliers bid. Each submitted bid is adjusted by the
+supplier's bonus/malus before comparison. The lowest adjusted bidders
+qualify for the final round.
+
+![Qualification auction with bonus/malus calculation in code](screenshots/78_qualification_auction_2.jpg)
+![Currently qualified suppliers](screenshots/70_current_qualified.jpg)
+
+**5. Final auction: top suppliers compete again.**
+
+The qualified suppliers (top 2 by default, configurable via
+`total_winning_qualification_suppliers`) submit final bids. The lowest
+adjusted bid wins.
+
+![Final auction bids](screenshots/5_final_auction_bids.jpg)
+
+**6. Winner confirms and pays via the contract's payable function.**
+
+The winning supplier confirms their bid value through the smart
+contract's `confirm_winning_bid` payable function, locking the contract
+state.
+
+![Winning bid value confirmation](screenshots/1_confirm_winning_bid_value.jpg)
+
+## What's in this repo
+
+| Folder            | What it shows                                                                          |
+| ---               | ---                                                                                    |
+| `contracts/`      | Five Solidity iterations from sketch to clean: `sc.sol` → `simpleAuctionContract.sol` → `fullAuctionContract.sol` → `procurementContract.sol` → `procurement_clean.sol`. Plus `abi.json` (compiled output) and `package.json` (deps). |
+| `screenshots/`    | Fourteen Remix IDE screenshots from the March 2025 polish pass, walking through the contract lifecycle from deployment to winning-bid confirmation. |
+
+## Tech stack
+
+- **Smart contract language**: Solidity (early iterations on `^0.4.25`,
+  March 2025 pass on `^0.8.4`)
+- **IDE**: Remix Ethereum (browser-based)
+- **Test network**: Rinkeby (active during 2022 dev) — deprecated by
+  Ethereum Foundation in October 2022. The 2025 pass ran on Remix VM
+  (Cancun fork) only.
+- **Wallet**: Metamask (Rinkeby connection during 2022)
+
+## Status
+
+- Active development: **May – July 2022** (initial build, theory
+  framing, five contract iterations, Rinkeby deployment)
+- Polish pass: **March 2025** (Solidity upgrade, screenshot pass for a
+  portfolio site, no architectural changes)
+- Rinkeby deployment: dead since the testnet was deprecated
+- Frozen snapshot, not under active development
+
+## Why archived
+
+The mechanism design pattern is sound. The adoption challenge is the
+harder one. Conservative procurement organizations — Tier-1 automotive
+suppliers, large industrial buyers — are unlikely to move sourcing onto
+a public blockchain in the near term, regardless of how cleanly the
+commitment problem can be solved on it. And smart contracts only solve
+the auction layer: the off-chain delivery performance risk (does the
+supplier actually deliver as bid?) remains entirely orthogonal and
+needs separate trust infrastructure.
+
+The speculative-crypto cycle that surrounded blockchain in 2022 has
+cooled. The use case represented here — smart contracts as
+immutable-mechanism implementation in B2B coordination problems — is
+quieter, narrower, and arguably more interesting than the trading
+hype, but it has not yet found its commercial pathway.
+
+This project is preserved as a snapshot of the bridge between mechanism
+design theory and concrete on-chain implementation. The current focus
+is on AI Product Engineering at Expliq AI, where the problem
+formulations are different but the underlying discipline (mechanism
+design + tooling that earns trust) is the same.
+
+## Acknowledgements
+
+The base reverse-auction contract structure was adapted from a public
+Solidity tutorial repository
+([Solidity-Contracts/Reverse-Auction](https://github.com/Solidity-Contracts/Reverse-Auction)).
+The procurement-specific multi-stage architecture (RFI/RFP hash
+commits, bonus/malus per supplier, qualification → final auction
+filtering, winner-payable confirmation) is an original adaptation of
+the four-stage TWS-Partners-style procurement schema, extended for
+combinatorial bidding logic in early drafts.
+
+The theoretical framing draws on Williamson's transaction cost
+economics, Hart-Moore property rights theory, Bolton's *Contract
+Theory* (2005), and the implementation theory literature (Mas-Colell,
+Moore-Repullo).
+
+---
+
+*Restored in 2026 from a local archive of the 2022 build with March
+2025 polish pass.*
