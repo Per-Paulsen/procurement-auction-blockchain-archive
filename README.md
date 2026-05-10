@@ -1,7 +1,6 @@
 # Procurement Auctions on the Blockchain (archived)
 
-> Archived snapshot of a 2022 Solidity prototype with a 2025 polish pass.
-> No longer maintained.
+> Archived snapshot of a Solidity prototype. No longer maintained.
 
 **Credible commitment for procurement auctions, implemented on Ethereum.**
 
@@ -111,25 +110,22 @@ state.
 
 | Folder            | What it shows                                                                          |
 | ---               | ---                                                                                    |
-| `contracts/`      | Six Solidity files. Five 2022 iterations from sketch to clean (Solidity `^0.4.25`): `sc.sol` → `simpleAuctionContract.sol` → `fullAuctionContract.sol` → `procurementContract.sol` → `procurement_clean.sol`. Plus `procurement_clean_v2.sol` — the March 2025 polish pass on Solidity `^0.8.4` (the version visible in the screenshots; this is the recommended file to open in Remix). Plus `abi.json` (compiled output) and `package.json` (deps). |
-| `screenshots/`    | Fourteen Remix IDE screenshots from the March 2025 polish pass, walking through the contract lifecycle from deployment to winning-bid confirmation. |
+| `contracts/`      | Six Solidity files. Five iterations from sketch to clean (Solidity `^0.4.25`): `sc.sol` → `simpleAuctionContract.sol` → `fullAuctionContract.sol` → `procurementContract.sol` → `procurement_clean.sol`. Plus `procurement_clean_v2.sol` — a later polish pass on Solidity `^0.8.4` (the version visible in the screenshots; this is the recommended file to open in Remix). Plus `abi.json` (compiled output) and `package.json` (deps). |
+| `screenshots/`    | Fourteen Remix IDE screenshots from the polish pass, walking through the contract lifecycle from deployment to winning-bid confirmation. |
 
 ## Tech stack
 
-- **Smart contract language**: Solidity (2022 iterations on `^0.4.25`;
-  March 2025 polish pass on `^0.8.4`, see `contracts/procurement_clean_v2.sol`)
+- **Smart contract language**: Solidity (early iterations on `^0.4.25`;
+  later polish pass on `^0.8.4`, see `contracts/procurement_clean_v2.sol`)
 - **IDE**: Remix Ethereum (browser-based)
-- **Test network**: Rinkeby (active during 2022 dev) — deprecated by
-  Ethereum Foundation in October 2022. The 2025 pass ran on Remix VM
-  (Cancun fork) only.
-- **Wallet**: Metamask (Rinkeby connection during 2022)
+- **Test network**: Rinkeby — deprecated by Ethereum Foundation in
+  October 2022. The polish pass ran on Remix VM (Cancun fork) only.
+- **Wallet**: Metamask (Rinkeby connection during early development)
 
 ## Status
 
-- Active development: **May – July 2022** (initial build, theory
-  framing, five contract iterations, Rinkeby deployment)
-- Polish pass: **March 2025** (Solidity upgrade, screenshot pass for a
-  portfolio site, no architectural changes)
+- Five contract iterations from sketch to clean (Solidity `^0.4.25`)
+- Later polish pass on `^0.8.4` (modern compiler, screenshot pass)
 - Rinkeby deployment: dead since the testnet was deprecated
 - Frozen snapshot, not under active development
 
@@ -144,8 +140,7 @@ the auction layer: the off-chain delivery performance risk (does the
 supplier actually deliver as bid?) remains entirely orthogonal and
 needs separate trust infrastructure.
 
-The speculative-crypto cycle that surrounded blockchain in 2022 has
-cooled. The use case represented here — smart contracts as
+The speculative-crypto cycle that surrounded blockchain has cooled. The use case represented here — smart contracts as
 immutable-mechanism implementation in B2B coordination problems — is
 quieter, narrower, and arguably more interesting than the trading
 hype, but it has not yet found its commercial pathway.
@@ -175,5 +170,4 @@ Theory* (2005, MIT Press) provides the textbook synthesis.
 
 ---
 
-*Restored in 2026 from a local archive of the 2022 build with March
-2025 polish pass.*
+*Restored in 2026 from a local archive.*
