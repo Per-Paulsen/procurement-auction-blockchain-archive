@@ -2,9 +2,9 @@
 
 > Archived snapshot of a Solidity prototype. No longer maintained.
 
-**Credible commitment for procurement auctions, implemented on Ethereum.**
+**Credible commitment for procurement auctions, implemented on the blockchain.**
 
-▶️ **[Try the contract yourself in Remix](https://remix.ethereum.org/?#url=https://github.com/Per-Paulsen/procurement-auction-blockchain-archive/blob/main/contracts/procurement_clean_v2.sol)** — opens `procurement_clean_v2.sol` (Solidity ^0.8.4) directly in the browser-based Remix IDE. No wallet, no setup: compile, deploy on Remix VM, and click through the auction lifecycle yourself.
+▶️ **[Try the contract yourself in Remix](https://remix.ethereum.org/?#url=https://github.com/Per-Paulsen/procurement-auction-archive/blob/main/contracts/procurement_clean_v2.sol)** — opens `procurement_clean_v2.sol` (Solidity ^0.8.4) directly in the browser-based Remix IDE. No wallet, no setup: compile, deploy on Remix VM, and click through the auction lifecycle yourself.
 
 ## The pitch in one paragraph
 
