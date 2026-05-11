@@ -4,12 +4,12 @@
 
 **Credible commitment for procurement auctions, implemented on the blockchain.**
 
-▶️ **[Try the contract yourself in Remix](https://remix.ethereum.org/?#url=https://github.com/Per-Paulsen/procurement-auction-archive/blob/main/contracts/procurement_clean_v2.sol)** — opens `procurement_clean_v2.sol` (Solidity ^0.8.4) directly in the browser-based Remix IDE. No wallet, no setup: compile, deploy on Remix VM, and click through the auction lifecycle yourself.
+▶️ **[Try the contract yourself in Remix](https://remix.ethereum.org/?#url=https://github.com/Per-Paulsen/procurement-auction-archive/blob/main/contracts/procurement_clean_v2.sol)**. Opens `procurement_clean_v2.sol` (Solidity ^0.8.4) directly in the browser-based Remix IDE. No wallet, no setup: compile, deploy on Remix VM, and click through the auction lifecycle yourself.
 
 ## The pitch in one paragraph
 
 In B2B procurement, even an optimized multi-stage auction can fail
-in practice — not because
+in practice, not because
 the mechanism is bad, but because suppliers can't fully trust that the
 outcome is final. They expect renegotiation. They hedge their bids
 accordingly. The auction degrades into yet another round of negotiation.
@@ -25,8 +25,8 @@ with a bonus/malus mechanism for supplier differentiation.
 While supporting auction-design consulting at a Tier-1 automotive
 supplier, my mentor told me about an Italian supplier who had been
 eliminated in the qualification round. The supplier called my mentor
-and asked: *"How do we proceed from here?"* My mentor: *"You don't —
-you've been eliminated."* The supplier: *"Yes, I understand — but how
+and asked: *"How do we proceed from here?"* My mentor: *"You don't,
+you've been eliminated."* The supplier: *"Yes, I understand, but how
 do we proceed? I can of course bid lower."*
 
 That conversation crystallized the commitment problem in procurement.
@@ -46,7 +46,7 @@ problem: by encoding the auction in immutable code, the buyer commits
 not by intention but by structural impossibility of deviation. **The
 auction itself becomes the commitment device.**
 
-## How it works — the four-stage reverse auction
+## How it works: the four-stage reverse auction
 
 The contract codifies a multi-stage procurement schema, extended
 with a bonus/malus system for supplier differentiation.
@@ -110,7 +110,7 @@ state.
 
 | Folder            | What it shows                                                                          |
 | ---               | ---                                                                                    |
-| `contracts/`      | Six Solidity files. Five iterations from sketch to clean (Solidity `^0.4.25`): `sc.sol` → `simpleAuctionContract.sol` → `fullAuctionContract.sol` → `procurementContract.sol` → `procurement_clean.sol`. Plus `procurement_clean_v2.sol` — a later polish pass on Solidity `^0.8.4` (the version visible in the screenshots; this is the recommended file to open in Remix). Plus `abi.json` (compiled output) and `package.json` (deps). |
+| `contracts/`      | Six Solidity files. Five iterations from sketch to clean (Solidity `^0.4.25`): `sc.sol` → `simpleAuctionContract.sol` → `fullAuctionContract.sol` → `procurementContract.sol` → `procurement_clean.sol`. Plus `procurement_clean_v2.sol`, a later polish pass on Solidity `^0.8.4` (the version visible in the screenshots; this is the recommended file to open in Remix). Plus `abi.json` (compiled output) and `package.json` (deps). |
 | `screenshots/`    | Fourteen Remix IDE screenshots from the polish pass, walking through the contract lifecycle from deployment to winning-bid confirmation. |
 
 ## Tech stack
@@ -118,7 +118,7 @@ state.
 - **Smart contract language**: Solidity (early iterations on `^0.4.25`;
   later polish pass on `^0.8.4`, see `contracts/procurement_clean_v2.sol`)
 - **IDE**: Remix Ethereum (browser-based)
-- **Test network**: Rinkeby — deprecated by Ethereum Foundation in
+- **Test network**: Rinkeby, deprecated by Ethereum Foundation in
   October 2022. The polish pass ran on Remix VM (Cancun fork) only.
 - **Wallet**: Metamask (Rinkeby connection during early development)
 
@@ -132,16 +132,16 @@ state.
 ## Why archived
 
 The mechanism design pattern is sound. The adoption challenge is the
-harder one. Conservative procurement organizations — Tier-1 automotive
-suppliers, large industrial buyers — are unlikely to move sourcing onto
+harder one. Conservative procurement organizations (Tier-1 automotive
+suppliers, large industrial buyers) are unlikely to move sourcing onto
 a public blockchain in the near term, regardless of how cleanly the
 commitment problem can be solved on it. And smart contracts only solve
 the auction layer: the off-chain delivery performance risk (does the
 supplier actually deliver as bid?) remains entirely orthogonal and
 needs separate trust infrastructure.
 
-The speculative-crypto cycle that surrounded blockchain has cooled. The use case represented here — smart contracts as
-immutable-mechanism implementation in B2B coordination problems — is
+The speculative-crypto cycle that surrounded blockchain has cooled. The use case represented here, smart contracts as
+immutable-mechanism implementation in B2B coordination problems, is
 quieter, narrower, and arguably more interesting than the trading
 hype, but it has not yet found its commercial pathway.
 
