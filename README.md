@@ -1,4 +1,4 @@
-# Procurement Auctions on the Blockchain (archived)
+# Procurement Auction (archived)
 
 > Archived snapshot of a Solidity prototype. No longer maintained.
 
