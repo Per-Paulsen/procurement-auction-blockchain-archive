@@ -8,8 +8,8 @@
 
 ## The pitch in one paragraph
 
-In B2B procurement, even an optimized multi-stage auction (the kind built
-by specialist firms like TWS Partners) can fail in practice — not because
+In B2B procurement, even an optimized multi-stage auction can fail
+in practice — not because
 the mechanism is bad, but because suppliers can't fully trust that the
 outcome is final. They expect renegotiation. They hedge their bids
 accordingly. The auction degrades into yet another round of negotiation.
@@ -48,8 +48,8 @@ auction itself becomes the commitment device.**
 
 ## How it works — the four-stage reverse auction
 
-The contract codifies the multi-stage TWS-style procurement schema,
-extended with a bonus/malus system for supplier differentiation.
+The contract codifies a multi-stage procurement schema, extended
+with a bonus/malus system for supplier differentiation.
 
 **1. Buyer deploys the contract and issues a request for quotation.**
 
@@ -158,9 +158,9 @@ Solidity tutorial repository
 ([Solidity-Contracts/Reverse-Auction](https://github.com/Solidity-Contracts/Reverse-Auction)).
 The procurement-specific multi-stage architecture (RFI/RFP hash
 commits, bonus/malus per supplier, qualification → final auction
-filtering, winner-payable confirmation) is an original adaptation of
-a multi-stage TWS-Partners-style awarding design, extended for
-combinatorial bidding logic in early drafts.
+filtering, winner-payable confirmation) is an original multi-stage
+awarding design, extended for combinatorial bidding logic in early
+drafts.
 
 The theoretical framing draws on the mechanism-design-with-limited-
 commitment literature (McAfee & Vincent 1997; Bester & Strausz 2001;
